@@ -1,1 +1,1 @@
-select * from livros;
+select titulo from livros;
