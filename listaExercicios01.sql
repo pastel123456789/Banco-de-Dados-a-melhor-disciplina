@@ -69,3 +69,7 @@ group by produto
 order by receita_total desc
 limit 1;
 
+19) select alunos.nome, count(matriculas.curso) as qtd_matricula
+from alunos
+inner join matriculas on alunos.id = matriculas.aluno_id
+group by alunos.nome;
