@@ -10,3 +10,6 @@ inner join autores on autores.id = 1 and livros.autor_id = autores.id;
 4) select alunos.nome
 from alunos
 inner join matriculas on matriculas.curso = 'Engenharia de Software' and matriculas.aluno_id = alunos.id;
+
+5) select produto, sum(receita) as receita_total from vendas
+group by produto;
