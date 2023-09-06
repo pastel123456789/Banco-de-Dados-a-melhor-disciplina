@@ -13,3 +13,8 @@ inner join matriculas on matriculas.curso = 'Engenharia de Software' and matricu
 
 5) select produto, sum(receita) as receita_total from vendas
 group by produto;
+
+6) select autores.nome, count(livros.autor_id) as quantidade_livros
+from autores
+inner join livros on autores.id = livros.autor_id
+group by autores.nome;
