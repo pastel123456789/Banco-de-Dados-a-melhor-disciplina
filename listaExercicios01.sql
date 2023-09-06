@@ -73,3 +73,7 @@ limit 1;
 from alunos
 inner join matriculas on alunos.id = matriculas.aluno_id
 group by alunos.nome;
+
+20) select produto, count(produto) as transacoes from vendas
+group by produto
+order by transacoes desc;
