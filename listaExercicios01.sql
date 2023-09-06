@@ -18,3 +18,8 @@ group by produto;
 from autores
 inner join livros on autores.id = livros.autor_id
 group by autores.nome;
+
+7) select count(alunos.id) as quantidade_alunos, matriculas.curso
+from alunos
+inner join matriculas on alunos.id = matriculas.aluno_id
+group by curso
