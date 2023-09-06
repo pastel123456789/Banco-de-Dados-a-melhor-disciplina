@@ -23,3 +23,6 @@ group by autores.nome;
 from alunos
 inner join matriculas on alunos.id = matriculas.aluno_id
 group by curso
+
+8) select produto, avg(receita) as receita_media from vendas
+group by produto;
