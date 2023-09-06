@@ -61,4 +61,6 @@ inner join matriculas on matriculas.aluno_id = alunos.id;
 from autores
 inner join livros on autores.id = livros.autor_id
 group by autores.nome
-order by quantidade_livros desc;
+order by quantidade_livros desc
+limit 1;
+
