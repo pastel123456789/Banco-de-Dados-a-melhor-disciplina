@@ -40,3 +40,7 @@ having quantidade_livros > 2;
 11) select livros.titulo, autores.nome
 from livros
 inner join autores on livros.autor_id = autores.id;
+
+12) select alunos.nome, matriculas.curso
+from alunos
+inner join matriculas on matriculas.aluno_id = alunos.id;
