@@ -13,6 +13,16 @@ inner join Categoria on Categoria.Categoria_ID = Livro.Categoria_ID
 where nome_categoria = Categoria.Nome;
 END;
 
+ex 3
+CREATE PROCEDURE sp_ContarLivrosPorCategoria(IN nome_categoria varchar(200))
+BEGIN
+select count(Livro.Titulo) as numero_de_livros, Categoria.Nome as categoria
+from Livro
+inner join Categoria on Categoria.Categoria_ID = Livro.Categoria_ID
+where nome_categoria = Categoria.Nome
+group by Categoria.Nome;
+END;
+
 
 
 
