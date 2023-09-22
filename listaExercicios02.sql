@@ -39,6 +39,14 @@ inner join Categoria on Categoria.Categoria_ID = Livro.Categoria_ID
 where nome_categoria = Categoria.Nome;
 END;
 
+ex 8
+CREATE PROCEDURE sp_AutorMaisAntigo()
+BEGIN
+SELECT Nome from Autor
+ORDER BY Data_Nascimento
+LIMIT 1;
+END
+
 
 
 
