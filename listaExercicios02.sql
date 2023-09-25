@@ -22,6 +22,24 @@ where nome_categoria = Categoria.Nome
 group by Categoria.Nome;
 END;
 
+ex 4 
+CREATE PROCEDURE sp_VerificarLivrosCategoria(IN nome_categoria varchar(200), OUT resposta varchar(50))
+BEGIN
+DECLARE quantidade INT DEFAULT 0;
+	select count(Livro.Titulo) as numero_de_livros
+    INTO quantidade
+	from Livro
+	inner join Categoria on Categoria.Categoria_ID = Livro.Categoria_ID
+	where nome_categoria = Categoria.Nome
+	group by Categoria.Nome
+	;
+IF quantidade > 0 THEN SET resposta = 'possui livros';
+ELSE 
+SET resposta = 'não possui livros';
+END IF;
+select resposta;
+END;
+
 ex 5
 CREATE PROCEDURE sp_LivrosAteAno(IN ano year)
 BEGIN
