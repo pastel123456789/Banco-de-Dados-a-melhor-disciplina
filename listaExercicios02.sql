@@ -84,5 +84,13 @@ LIMIT 1;
 END
 -- fim da procedure
 
+ex 10
+CREATE PROCEDURE sp_LivrosESeusAutores()
+BEGIN
+select Livro.Titulo, Autor.Nome, Autor.Sobrenome
+from Livro
+inner join Autor_Livro on Autor_Livro.Livro_ID = Livro.Livro_ID
+inner join Autor on Autor_Livro.Autor_ID = Autor.Autor_ID;
+END
 
 
