@@ -57,6 +57,31 @@ inner join Categoria on Categoria.Categoria_ID = Livro.Categoria_ID
 where nome_categoria = Categoria.Nome;
 END;
 
+ex 7
+CREATE PROCEDURE sp_AdicionarLivro(
+    in livro_titulo varchar(255),
+    in editora_id int,
+    in ano_publicacao int,
+    in numero_paginas int,
+    in categoria_id int,
+    out resposta varchar(100)
+)
+begin
+    declare livro_existe int;
+	select COUNT(*) into livro_existe
+    from Livro
+    where Titulo = livro_titulo;
+    if livro_existe > 0 then
+        set resposta = "Esse título já exite";
+    else
+        insert into Livro (Titulo, Editora_ID, Ano_Publicacao, Numero_Paginas, Categoria_ID)
+        values (livro_titulo, editora_id, ano_publicacao, numero_paginas, categoria_id);
+
+        set resposta = "Livro adicionado";
+    end if;
+    select resposta;
+end;
+
 ex 8
 CREATE PROCEDURE sp_AutorMaisAntigo()
 BEGIN
