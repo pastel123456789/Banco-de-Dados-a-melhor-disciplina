@@ -23,3 +23,19 @@ produto VARCHAR(100),
 preco FLOAT,
 quantidade INT
 );
+
+-- 2
+INSERT INTO produtos VALUES 
+('banana', 1000.900, 1000000.577),
+('cartucho de carabina', 300.905, 100.6766),
+('peixe', 5.6467, 50.777),
+('morangos frescos', 40.643, 22.4359342875934652354);
+
+select round(preco, 2) from produtos;
+
+select abs(quantidade) from produtos;
+
+select avg(preco) from produtos;
+
+
+
