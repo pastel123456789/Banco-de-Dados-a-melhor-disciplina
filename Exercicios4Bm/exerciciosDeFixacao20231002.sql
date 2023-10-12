@@ -17,6 +17,8 @@ select length(nome) from nomes;
 select concat('Sr. ', nome) from nomes where nome like '%o';
 select concat('Sra. ', nome) from nomes where nome like '%a';
 
+
+-- 2
 DROP TABLE produtos;
 CREATE TABLE produtos (
 produto VARCHAR(100),
@@ -24,7 +26,6 @@ preco FLOAT,
 quantidade INT
 );
 
--- 2
 INSERT INTO produtos VALUES 
 ('banana', 1000.900, 1000000.577),
 ('cartucho de carabina', 300.905, 100.6766),
