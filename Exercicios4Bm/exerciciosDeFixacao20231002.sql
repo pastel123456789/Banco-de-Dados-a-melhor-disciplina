@@ -78,3 +78,9 @@ SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos wher
 SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'banana' UNION
 SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'peixe' UNION
 SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'pôneis';
+
+-- 6
+SELECT COUNT(produto) FROM produtos;
+SELECT MAX(preco) FROM produtos;
+SELECT MIN(preco) FROM produtos;
+SELECT SUM(quantidade) FROM produtos;
