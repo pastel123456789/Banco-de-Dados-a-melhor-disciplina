@@ -64,6 +64,17 @@ SELECT DAYNAME('2020-03-09 18:00:00');
 SELECT produto, IF(quantidade > 0, 'Em estoque','Fora de estoque') as estoque from produtos;
 
 SELECT produto, CASE WHEN preco < 300 THEN 'barato' WHEN preco >= 300 and preco <= 1000 THEN 'médio' WHEN preco > 1000 THEN 'caro' END as categoria from produtos;
-SELECT produto, IF(quantidade > 0, 'Em estoque','Fora de estoque') as estoque from produtos;
 
-SELECT produto, CASE WHEN preco < 300 THEN 'barato' WHEN preco >= 300 and preco <= 1000 THEN 'médio' WHEN preco > 1000 THEN 'caro' END as categoria from produtos;
+
+-- 5
+CREATE FUNCTION TOTAL_VALOR(preco FLOAT, quantidade INT)
+RETURNS FLOAT DETERMINISTIC
+BEGIN
+	RETURN preco * quantidade;
+END;
+
+SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'morangos frescos' UNION
+SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'cartucho de carabina' UNION
+SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'banana' UNION
+SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'peixe' UNION
+SELECT produto, TOTAL_VALOR(preco, quantidade) as valor_total FROM produtos where produto = 'pôneis';
