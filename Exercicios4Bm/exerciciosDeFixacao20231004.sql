@@ -93,3 +93,47 @@ BEGIN
     RETURN @resumos_atualizados;
 END;
 
+-- 4
+CREATE FUNCTION media_livros_por_editora() RETURNS DECIMAL(10, 2) DETERMINISTIC
+BEGIN
+    DECLARE total_livros INT;
+    DECLARE total_editoras INT;
+    DECLARE editora_id INT;
+    DECLARE total_livros_editora INT;
+    DECLARE media DECIMAL(10, 2) DEFAULT 0;
+    DECLARE cur_editoras CURSOR FOR 
+        SELECT id FROM Editora;
+    SET total_livros := (SELECT COUNT(*) FROM Livro);
+    SET total_editoras := (SELECT COUNT(*) FROM Editora);
+    
+    
+    IF total_editoras = 0 THEN
+        RETURN 0; 
+    END IF;
+    
+    
+    
+    OPEN cur_editoras;
+
+    read_editora: LOOP
+        FETCH cur_editoras INTO editora_id;
+        IF total_editoras = 0 THEN
+            LEAVE read_editora;
+        END IF;
+        
+        
+        SET total_livros_editora := (
+            SELECT COUNT(*)
+            FROM Livro
+            WHERE id_editora = editora_id
+        );
+        
+        
+        SET media := media + (total_livros_editora / total_editoras);
+    END LOOP;
+
+    CLOSE cur_editoras;
+    
+    RETURN media;
+END;
+
