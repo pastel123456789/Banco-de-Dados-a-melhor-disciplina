@@ -55,3 +55,41 @@ BEGIN
 
     RETURN @titulos;
 END
+
+-- 3
+CREATE FUNCTION atualizar_resumos() RETURNS TEXT DETERMINISTIC
+BEGIN
+    DECLARE fim INT DEFAULT 0;
+    DECLARE livro_id INT;
+    DECLARE resumo_atual TEXT;
+    
+    DECLARE c_atualizar CURSOR FOR 
+        SELECT id, resumo
+        FROM Livro;
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET fim = 1;
+
+    OPEN c_atualizar;
+
+    SET @resumos_atualizados := '';
+
+    loop_legal: LOOP
+        FETCH c_atualizar INTO livro_id, resumo_atual;
+        IF fim THEN
+            LEAVE loop_legal;
+        END IF;
+        
+        SET resumo_atual = CONCAT(resumo_atual, '\nEste é um excelente livro!');
+        
+        UPDATE Livro
+        SET resumo = resumo_atual
+        WHERE id = livro_id;
+        
+        SET @resumos_atualizados := CONCAT_WS('\n', @resumos_atualizados, resumo_atual);
+    END LOOP;
+
+    CLOSE c_atualizar;
+    
+    RETURN @resumos_atualizados;
+END;
+
