@@ -137,3 +137,39 @@ BEGIN
     RETURN media;
 END;
 
+-- 5
+CREATE FUNCTION autores_sem_livros() RETURNS TEXT DETERMINISTIC
+BEGIN
+    DECLARE autor_id INT;
+    DECLARE primeiro_nome_autor VARCHAR(255);
+    DECLARE ultimo_nome_autor VARCHAR(255);
+    DECLARE done INT DEFAULT 0;
+    DECLARE autores_sem_livros TEXT DEFAULT '';
+    
+    DECLARE cur_autores CURSOR FOR 
+        SELECT id, primeiro_nome, ultimo_nome
+        FROM Autor;
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN cur_autores;
+
+    read_loop: LOOP
+        FETCH cur_autores INTO autor_id, primeiro_nome_autor, ultimo_nome_autor;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM Livro_Autor 
+            WHERE id_autor = autor_id
+        ) THEN
+            SET autores_sem_livros := CONCAT(autores_sem_livros, primeiro_nome_autor, ' ', ultimo_nome_autor, '\n');
+        END IF;
+    END LOOP;
+
+    CLOSE cur_autores;
+
+    RETURN autores_sem_livros;
+END;
